@@ -4,9 +4,10 @@
   "version": "1.0",
   "description": "Save Chess.com chat.",
   "permissions": ["activeTab", "scripting"],
-  "action": {
-    "default_popup": "popup.html"
-    
+  "icons" : {
+    "16" : "foto/logo.png",
+    "48" : "foto/logo.png",
+    "128" : "foto/logo.png"
   },
   "content_scripts": [
     {

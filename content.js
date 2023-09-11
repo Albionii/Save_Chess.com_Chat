@@ -21,25 +21,25 @@ function createButton() {
 
     if (chatSave){
       var textToSave = chatSave;
-      // Create a Blob with the text
-      var blob = new Blob([textToSave], { type: 'text/plain' });
-  
-      // Create an anchor element for downloading
+
+      var blob = new Blob([textToSave], { type: 'text/plain' }); // Create a Blob with the text
       var a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = 'textFile.txt';
-  
-      // Trigger a click event on the anchor element to initiate the download
       a.click();
-  
-      // Clean up resources
       window.URL.revokeObjectURL(a.href);
     }
     else {
       alert("There is no chat room. Play a game!");
     }
   });
+
+  function saveChatToLocalStorage(){
+    
+  }
 }
+
+
 
 
 
