@@ -12,11 +12,10 @@ function createButton() {
 
   button.addEventListener('click', () => {
     
-    let chatDiv = document.getElementsByClassName('chat-scroll-area-component');//tabs-tab tabs-active // chat-scroll-area-component
+    let chatDiv = document.getElementsByClassName('chat-scroll-area-component');
     for (var i = 0; i < chatDiv.length; i++) {
       var plainText = chatDiv[i].innerText;
       chatSave = plainText;
-      // console.log(plainText);
     }
     
 
@@ -28,7 +27,7 @@ function createButton() {
       else {
         textToSave = localStorage.getItem('chat_history');
       }
-      var blob = new Blob([textToSave], { type: 'text/plain' }); // Create a Blob with the text
+      var blob = new Blob([textToSave], { type: 'text/plain' }); 
       var a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = 'textFile.txt';
@@ -40,13 +39,12 @@ function createButton() {
     else {
       alert("There is no chat room. Play a game with someone!");
     }
-    // localStorage.removeItem('chat_history');
   });
 }
 
 
 function saveChatToLocalStorage(){
-  let chatDiv = document.getElementsByClassName('chat-scroll-area-component');//tabs-tab tabs-active // chat-scroll-area-component
+  let chatDiv = document.getElementsByClassName('chat-scroll-area-component');
   for (var i = 0; i < chatDiv.length; i++) {
     var plainText = chatDiv[i].innerText;
   }
@@ -56,9 +54,6 @@ function saveChatToLocalStorage(){
 }
 
 
-
-
-// Check if the current page is a PDF
 if (window.location.href.startsWith("https://www.chess.com/")) {
   createButton();
 }
