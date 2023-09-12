@@ -1,4 +1,5 @@
 // content.js
+let chatSave;
 function createButton() {
   const button = document.createElement('button');
   button.innerText = 'Download Chat';
@@ -8,37 +9,51 @@ function createButton() {
   button.style.right = '20px';
   document.body.appendChild(button);
 
-  let chatSave;
-
 
   button.addEventListener('click', () => {
-    let chatDiv = document.getElementsByClassName('chat-scroll-area-component');
+    
+    let chatDiv = document.getElementsByClassName('chat-scroll-area-component');//tabs-tab tabs-active // chat-scroll-area-component
     for (var i = 0; i < chatDiv.length; i++) {
       var plainText = chatDiv[i].innerText;
       chatSave = plainText;
-      console.log(plainText);
+      // console.log(plainText);
     }
+    
 
-    if (chatSave){
-      var textToSave = chatSave;
-
+    if (chatSave || localStorage.getItem('chat_history')){
+      var textToSave;
+      if (chatSave){
+        textToSave = chatSave;
+      } 
+      else {
+        textToSave = localStorage.getItem('chat_history');
+      }
       var blob = new Blob([textToSave], { type: 'text/plain' }); // Create a Blob with the text
       var a = document.createElement('a');
       a.href = window.URL.createObjectURL(blob);
       a.download = 'textFile.txt';
       a.click();
       window.URL.revokeObjectURL(a.href);
+      chatSave = '';
+      localStorage.setItem('chat_history', '');
     }
     else {
-      alert("There is no chat room. Play a game!");
+      alert("There is no chat room. Play a game with someone!");
     }
+    // localStorage.removeItem('chat_history');
   });
-
-  function saveChatToLocalStorage(){
-    
-  }
 }
 
+
+function saveChatToLocalStorage(){
+  let chatDiv = document.getElementsByClassName('chat-scroll-area-component');//tabs-tab tabs-active // chat-scroll-area-component
+  for (var i = 0; i < chatDiv.length; i++) {
+    var plainText = chatDiv[i].innerText;
+  }
+  if (plainText){
+    localStorage.setItem('chat_history', plainText);
+  }
+}
 
 
 
@@ -47,3 +62,4 @@ function createButton() {
 if (window.location.href.startsWith("https://www.chess.com/")) {
   createButton();
 }
+window.addEventListener('beforeunload', saveChatToLocalStorage);
